@@ -1,0 +1,11 @@
+.btshome{
+   
+    padding: 20px;
+
+}
+
+.btshome button{
+    background-color: black;
+  margin-right: 50px;    /* espaço entre os botões */
+  
+}

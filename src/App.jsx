@@ -15,6 +15,8 @@ import Importar from "./components/importar"
 
 import Exportar from "./components/exportar"
 
+import Home from "./components/home"
+
 // Componente principal da aplicação
 function App() {
 
@@ -39,7 +41,7 @@ function App() {
         onLogin recebe uma função que muda a tela para "menu"
       */}
       {tela === "login" && (
-        <Login onLogin={() => setTela("menu")} />
+        <Login onLogin={() => setTela("home")} />
       )}
 
       {/*
@@ -57,13 +59,17 @@ function App() {
         <Inventario />
       )}
 
-            {tela === "importar" && (
+      {tela === "importar" && (
         <Importar />
       )}
 
 
        {tela === "exportar" && (
         <Exportar />
+      )}
+
+      {tela === "home" && (
+        <Home mudarTela={setTela} />
       )}
 
       
