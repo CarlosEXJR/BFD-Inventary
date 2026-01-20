@@ -1,0 +1,62 @@
+.exportar-container {
+  min-height: calc(100vh - 64px);
+  padding-top: 100px;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+}
+
+/* CARD PRINCIPAL */
+.exportar-card {
+  background-color: #efefef;
+  border-radius: 16px;
+  padding: 40px;
+  width: 900px;
+}
+
+/* TÍTULO */
+.exportar-card h2 {
+  font-size: 26px;
+  margin-bottom: 25px;
+}
+
+/* TABELA */
+.exportar-tabela {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px 0;
+}
+
+/* CABEÇALHO */
+.exportar-header {
+  display: grid;
+  grid-template-columns: 1fr 150px 100px;
+  padding: 12px 20px;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+/* LINHAS */
+.exportar-linha {
+  display: grid;
+  grid-template-columns: 1fr 150px 100px;
+  padding: 14px 20px;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.exportar-linha:last-child {
+  border-bottom: none;
+}
+
+/* BOTÃO DOWNLOAD */
+.btn-download {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.btn-download:hover {
+  opacity: 0.6;
+}
