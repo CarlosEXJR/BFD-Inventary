@@ -1,62 +1,73 @@
 .exportar-container {
-  min-height: calc(100vh - 64px);
-  padding-top: 100px;
-  background-color: #f5f5f5;
-  display: flex;
-  justify-content: center;
+    min-height: calc(100vh - 64px);
+    padding-top: 120px;
+    background-color: #1f2933; /* Cor do fundo da sua Home */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* CARD PRINCIPAL */
-.exportar-card {
-  background-color: #efefef;
-  border-radius: 16px;
-  padding: 40px;
-  width: 900px;
+.titulo-sessao {
+    color: #4a90e2; /* Azul da Home */
+    font-size: 2rem;
+    margin-bottom: 40px;
+    font-family: sans-serif;
 }
 
-/* TÍTULO */
-.exportar-card h2 {
-  font-size: 26px;
-  margin-bottom: 25px;
+.exportar-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
-/* TABELA */
-.exportar-tabela {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 10px 0;
+/* O BOTÃO ESTILIZADO COMO CARD */
+.card-exportar {
+    background: #2b3640; /* Cor interna do card */
+    border: 1px solid #ffffff; /* Borda branca fina igual à Home */
+    border-radius: 12px;
+    padding: 30px;
+    width: 100%;
+    max-width: 420px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-/* CABEÇALHO */
-.exportar-header {
-  display: grid;
-  grid-template-columns: 1fr 150px 100px;
-  padding: 12px 20px;
-  font-weight: bold;
-  border-bottom: 1px solid #ddd;
+.card-exportar:hover {
+    border-color: #4a90e2;      /* Azul de destaque */
+    background-color: #2b3640;  /* Mantém o fundo escuro */
+    transform: translateY(-8px); /* Salto de 8px */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Sombra de profundidade */
+    transition: all 0.3s ease;  /* Movimento suave */
 }
 
-/* LINHAS */
-.exportar-linha {
-  display: grid;
-  grid-template-columns: 1fr 150px 100px;
-  padding: 14px 20px;
-  align-items: center;
-  border-bottom: 1px solid #eee;
+.card-header-exportar h3 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin: 0;
 }
 
-.exportar-linha:last-child {
-  border-bottom: none;
+.subtitulo-card {
+    color: #9aa5b1;
+    font-size: 0.9rem;
+    display: block;
+    margin-top: 5px;
 }
 
-/* BOTÃO DOWNLOAD */
-.btn-download {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
+.descricao-card {
+    color: #cbd5e0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 300;
 }
 
-.btn-download:hover {
-  opacity: 0.6;
+.linha-decorativa {
+    height: 1px;
+    background-color: #4e5d6c;
+    width: 100%;
+    margin-top: 10px;
 }

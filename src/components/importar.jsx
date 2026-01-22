@@ -6,7 +6,6 @@ function Importar() {
   const [arquivoSelecionado, setArquivoSelecionado] = useState(null);
   const [mensagem, setMensagem] = useState("");
 
-  // Função para quando você escolhe o arquivo no computador
   const selecionarArquivo = (e) => {
     if (e.target.files.length > 0) {
       setArquivoSelecionado(e.target.files[0]);
@@ -14,21 +13,16 @@ function Importar() {
     }
   };
 
-  // Função para processar o arquivo quando clica no botão confirmar
   const processarEnvio = () => {
     if (!arquivoSelecionado) return;
-
     const leitor = new FileReader();
-
     leitor.onload = (evento) => {
       try {
         const dadosBinarios = evento.target.result;
         const livro = XLSX.read(dadosBinarios, { type: 'binary' });
-        const nomeDaAba = livro.SheetNames[0];
-        const planilha = livro.Sheets[nomeDaAba];
+        const planilha = livro.Sheets[livro.SheetNames[0]];
         const dadosJson = XLSX.utils.sheet_to_json(planilha);
 
-        // Mapeia os dados garantindo que o ID da sua planilha seja usado
         const novosItens = dadosJson.map((linha) => ({
           id: Number(linha.ID) || Date.now() + Math.random(),
           codigo: String(linha.CODIGO || "S/C"),
@@ -37,71 +31,57 @@ function Importar() {
         }));
 
         const listaAntiga = JSON.parse(localStorage.getItem("meu_inventario") || "[]");
-        const listaNova = [...listaAntiga, ...novosItens];
-        
-        localStorage.setItem("meu_inventario", JSON.stringify(listaNova));
+        localStorage.setItem("meu_inventario", JSON.stringify([...listaAntiga, ...novosItens]));
         setMensagem(`Sucesso! ${novosItens.length} itens importados.`);
         setArquivoSelecionado(null);
       } catch (err) {
         setMensagem("Erro ao ler o arquivo. Verifique se é um Excel válido.");
       }
     };
-
     leitor.readAsBinaryString(arquivoSelecionado);
   };
 
   return (
-    <div className="importar-container" style={{ padding: '20px', textAlign: 'center' }}>
-      <h2>Importar Planilha XLS</h2>
+    <div className="importar-container">
+      <h1 className="titulo-sessao">Importar Inventário</h1>
       
-      <div className="upload-area" style={{ border: '2px dashed blueviolet', padding: '30px', borderRadius: '15px' }}>
-        {/* Input escondido para usarmos o nosso botão bonito */}
-        <input 
-          type="file" 
-          id="arquivo-input"
-          accept=".xlsx, .xls" 
-          onChange={selecionarArquivo} 
-          style={{ display: 'none' }} 
-        />
-        
-        <label htmlFor="arquivo-input" style={{ 
-          cursor: 'pointer', 
-          backgroundColor: '#eee', 
-          padding: '10px 20px', 
-          borderRadius: '5px',
-          border: '1px solid #ccc',
-          display: 'inline-block'
-        }}>
-          {arquivoSelecionado ? "📄 Arquivo Selecionado" : "📁 Escolher Arquivo Excel"}
-        </label>
+      <div className="importar-wrapper">
+        <div className="card-importar">
+          <div className="card-header-importar">
+            <h3>Selecionar Planilha</h3>
+            <span className="subtitulo-card">Formatos aceitos: .xlsx, .xls</span>
+          </div>
 
-        {arquivoSelecionado && (
-          <p style={{ marginTop: '10px', color: 'blueviolet', fontWeight: 'bold' }}>
-            {arquivoSelecionado.name}
+          <input 
+            type="file" 
+            id="arquivo-input"
+            accept=".xlsx, .xls" 
+            onChange={selecionarArquivo} 
+            style={{ display: 'none' }} 
+          />
+          
+          <label htmlFor="arquivo-input" className="label-upload">
+            {arquivoSelecionado ? "📄 " + arquivoSelecionado.name : "📁 Escolher Arquivo Excel"}
+          </label>
+
+          <p className="descricao-card">
+            Selecione o arquivo exportado ou sua planilha padrão para atualizar o banco de dados local.
           </p>
-        )}
+
+          <div className="linha-decorativa"></div>
+
+          <button 
+            onClick={processarEnvio}
+            disabled={!arquivoSelecionado}
+            className="btn-confirmar-import"
+          >
+            Confirmar e Enviar Dados
+          </button>
+        </div>
       </div>
 
-      <br />
-
-      <button 
-        onClick={processarEnvio}
-        disabled={!arquivoSelecionado}
-        className="btn-entrar"
-        style={{
-          opacity: arquivoSelecionado ? 1 : 0.5,
-          cursor: arquivoSelecionado ? 'pointer' : 'not-allowed'
-        }}
-      >
-        Confirmar e Enviar
-      </button>
-
       {mensagem && (
-        <p style={{ 
-          marginTop: '20px', 
-          color: mensagem.includes("Erro") ? 'red' : 'green',
-          fontWeight: 'bold'
-        }}>
+        <p className={mensagem.includes("Erro") ? "msg-erro" : "msg-sucesso"}>
           {mensagem}
         </p>
       )}

@@ -1,44 +1,40 @@
-import '../csscomponents/exportar.css'
-import { useState } from "react";
+import * as XLSX from 'xlsx';
+import '../csscomponents/exportar.css';
 
 function Exportar() {
+  
+  const baixarPlanilha = () => {
+    const dadosSalvos = localStorage.getItem("meu_inventario");
+    
+    if (!dadosSalvos) {
+      alert("Não há dados para exportar!");
+      return;
+    }
+
+    const listaProdutos = JSON.parse(dadosSalvos);
+    const folha = XLSX.utils.json_to_sheet(listaProdutos);
+    const livro = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(livro, folha, "Inventário Atual");
+
+    XLSX.writeFile(livro, "Relatorio_Inventario.xlsx");
+  };
+
   return (
     <div className="exportar-container">
-
-      <div className="exportar-card">
-
-        <h2>Últimas movimentações</h2>
-
-        <div className="exportar-tabela">
-
-          <div className="exportar-header">
-            <span>Nome</span>
-            <span>Data</span>
-            <span>Download</span>
+      <h1 className="titulo-sessao">Exportar Dados</h1>
+      
+      <div className="exportar-wrapper">
+        <button className="card-exportar" onClick={baixarPlanilha}>
+          <div className="card-header-exportar">
+            <h3>Exportar XLS</h3>
+            <span className="subtitulo-card">Relatórios de estoque</span>
           </div>
-
-          <div className="exportar-linha">
-            <span>Inventario_Geral_Dezembro.xls</span>
-            <span>16/12/2025</span>
-            <button className="btn-download">⬇</button>
-          </div>
-
-          <div className="exportar-linha">
-            <span>Relatorio_Perdas_2025.xls</span>
-            <span>12/12/2025</span>
-            <button className="btn-download">⬇</button>
-          </div>
-
-          <div className="exportar-linha">
-            <span>Entradas_Saidas_Semana42.xls</span>
-            <span>08/12/2025</span>
-            <button className="btn-download">⬇</button>
-          </div>
-
-        </div>
-
+          <p className="descricao-card">
+            Gere e baixe relatórios de estoque personalizados (inventário, entradas, saídas e movimentações) para análise e auditoria externa.
+          </p>
+          <div className="linha-decorativa"></div>
+        </button>
       </div>
-
     </div>
   );
 }

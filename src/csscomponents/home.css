@@ -5,6 +5,7 @@
     padding: 40px 20px;
     text-align: center;
     
+    
     /* CORREÇÃO: Centralização vertical perfeita */
     position: absolute;
     top: 50%;
@@ -14,7 +15,7 @@
 }
 
 .btshome h1 {
-    color:black;
+    color:#264a73;
     margin-bottom: 40px;
     font-size: 28px;
 }
@@ -35,7 +36,7 @@
     padding: 25px 20px;
     text-align: left;
     
-    background: white;
+    background: #2b3640;
     border: 2px solid #e0e0e0;
     border-radius: 10px;
     cursor: pointer;
@@ -47,16 +48,17 @@
 
 /* Efeito hover */
 .btshome button:hover {
-    border-color: #4a6fa5;
-    background-color: #f8f9fa;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    border-color: #4a90e2;      /* Azul de destaque */
+    background-color: #2b3640;  /* Mantém o fundo escuro para descansar a vista */
+    transform: translateY(-8px); /* Salto de 8px igual ao exportar */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Sombra de profundidade */
+    transition: all 0.3s ease;  /* Movimento suave */
 }
 
 /* Títulos dos botões (h2) */
 .btshome button h2 {
     margin: 0 0 8px 0;
-    color: #2c3e50;
+    color: #9aa5b1;
     font-size: 20px;
     font-weight: 600;
 }

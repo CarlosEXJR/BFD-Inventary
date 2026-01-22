@@ -10,7 +10,7 @@
   min-height: calc(100vh - 64px);
   padding: 20px;
   padding-top: 90px; /* 64px do menu + folga */
-  background-color: #f5f5f5;
+  background-color: #1a1a2e;
 }
 
 
@@ -75,6 +75,7 @@
 .inventario-tabela {
   width: 100%;
   margin-top: 15px;
+  background-color: #2b3640; 
 }
 
 
