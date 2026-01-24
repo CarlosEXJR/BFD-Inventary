@@ -4,20 +4,22 @@
     margin: 0 auto;
     padding: 40px 20px;
     text-align: center;
-    
-    
-    /* CORREÇÃO: Centralização vertical perfeita */
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
+    box-sizing: border-box;
 }
 
 .btshome h1 {
-    color:#264a73;
-    margin-bottom: 40px;
-    font-size: 28px;
+    color: var(--azul-destaque);
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-align: center;
+    transition: color 0.3s ease;
 }
 
 /* Container para os botões em linha */
@@ -28,37 +30,36 @@
     justify-content: center;
 }
 
-/* Estilo dos botões lado a lado */
+/* Estilo dos botões (Cards) */
 .btshome button {
     flex: 1;
     min-width: 300px;
     max-width: 380px;
     padding: 25px 20px;
     text-align: left;
-    
-    background: var(--bg-card);
-    border: 2px solid #e0e0e0;
+    background-color: var(--bg-card); /* Usa a variável dinâmica */
+    border: 2px solid var(--borda-card); /* Borda dinâmica */
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
 }
 
-/* Efeito hover */
+/* Efeito hover - A mágica da troca de cor acontece aqui */
 .btshome button:hover {
-    border-color: #4a90e2;      /* Azul de destaque */
-    background-color: #2b3640;  /* Mantém o fundo escuro para descansar a vista */
-    transform: translateY(-8px); /* Salto de 8px igual ao exportar */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Sombra de profundidade */
-    transition: all 0.3s ease;  /* Movimento suave */
+    border-color: var(--azul-destaque);
+    /* Inverte a cor do card com a do fundo para o efeito ser visível */
+    background-color: var(--bg-fundo); 
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Títulos dos botões (h2) */
 .btshome button h2 {
     margin: 0 0 8px 0;
-    color: #9aa5b1;
+    color: var(--texto-cor);
     font-size: 20px;
     font-weight: 600;
 }
@@ -66,7 +67,7 @@
 /* Subtítulo */
 .btshome button .subtitle {
     margin: 0 0 12px 0;
-    color: #666;
+    color: var(--texto-secundario); /* Cor dinâmica em vez de #666 */
     font-size: 14px;
     font-weight: 500;
 }
@@ -74,7 +75,7 @@
 /* Texto descritivo */
 .btshome button p {
     margin: 0;
-    color: #666;
+    color: var(--texto-secundario);
     font-size: 14px;
     line-height: 1.5;
     text-align: left;
@@ -84,42 +85,33 @@
 /* Linha divisória entre botões */
 .btshome .divider {
     border: none;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--borda-card); /* Dinâmica */
     margin: 15px 0 0 0;
     width: 100%;
 }
 
-/* Mensagem do Windows (nova seção) */
+/* Mensagem do Windows */
 .windows-notice {
     margin-top: 40px;
     padding-top: 20px;
-    border-top: 1px solid #eee;
-    color: #666;
+    border-top: 1px solid var(--borda-card);
+    color: var(--texto-secundario);
     font-size: 12px;
     line-height: 1.5;
 }
 
 /* Responsividade */
-@media (max-width: 1024px) {
-    .btshome button {
-        min-width: 280px;
-    }
-}
-
 @media (max-width: 768px) {
     .btshome {
         position: relative;
-        top: 0;
-        left: 0;
+        top: 0; left: 0;
         transform: none;
-        padding-top: 40px;
+        padding-top: 80px; /* Espaço para o menu fixo */
     }
-    
     .btshome .buttons-container {
         flex-direction: column;
         align-items: center;
     }
-    
     .btshome button {
         width: 100%;
         max-width: 100%;

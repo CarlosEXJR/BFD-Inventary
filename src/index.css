@@ -1,22 +1,24 @@
 /* 1. DEFINIÇÃO DAS CORES (PALETA GELO E ESCURA) */
 :root {
-  /* Tema Claro - Cinza Gelo Suave */
-  --bg-fundo: #4b5563;           
-  --bg-card: #f9fafb;        
-  --bg-menu: #f1f5f9;
-  --texto-cor: #334155;          
+  /* TEMA CLARO - AJUSTADO PARA O MENU APARECER */
+  --bg-fundo: #8d9fb6;           
+  --bg-card: #f8fafc;            
+  --bg-menu: #f1f5f9;            /* Cinza bem claro, mas sólido */
+  --texto-cor: #1e293b;          /* Azul grafite escuro para os botões do menu */
+  --texto-secundario: #64748b;   
   --borda-card: #cbd5e1;         
   --azul-destaque: #3b82f6;      
 }
 
 [data-theme='dark'] {
-  /* Tema Escuro - Azul Profundo */
-  --bg-fundo: #1a1a2e;           
-  --bg-card: #2b3640;            
-  --bg-menu: #1a1a1a;
-  --texto-cor: #ffffff;          
-  --borda-card: #ffffff;         
-  --azul-destaque: #4a90e2;      
+  /* TEMA ESCURO */
+  --bg-fundo: #1a1a2e;
+  --bg-card: #2b3640;
+  --bg-menu: #111111;            /* Fundo preto sólido para o menu no dark */
+  --texto-cor: #ffffff;
+  --texto-secundario: #9aa5b1;
+  --borda-card: #ffffff;
+  --azul-destaque: #4a90e2;
 }
 
 /* 2. REGRAS GERAIS */

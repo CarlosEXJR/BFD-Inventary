@@ -24,7 +24,7 @@
 
 /* O BOTÃO ESTILIZADO COMO CARD */
 .card-exportar {
-    background: var(--bg-card); /* Alterna entre azul escuro e branco */
+    background-color: var(--bg-card); /* Alterna entre azul escuro e branco */
     border: 1px solid var(--borda-card); /* Alterna a cor da borda */
     border-radius: 12px;
     padding: 30px;
@@ -39,6 +39,7 @@
 }
 
 .card-exportar:hover {
+    background-color: var(--bg-fundo);;
     border-color: var(--azul-destaque);
     transform: translateY(-8px); /* Salto padronizado */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);

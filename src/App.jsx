@@ -1,84 +1,65 @@
-// Importa o hook useState do React
-// useState serve para criar e controlar estados (valores que mudam na tela)
+// Importa o hook 'useState' do React para gerenciar a navegação interna (SPA)
 import { useState } from "react"
 
-// Importa o componente de Login
-import Login from "./components/Login"
+// --- IMPORTAÇÃO DOS COMPONENTES (Páginas do Sistema) ---
+import Login from "./components/Login"      // Tela de acesso e recuperação
+import Menu from "./components/menu"        // Barra superior de navegação e tema
+import Inventario from "./components/inventario" // Tabela e gerenciamento de itens
+import Importar from "./components/importar"   // Tela de upload de Excel
+import Exportar from "./components/exportar"   // Tela de download de Excel
+import Home from "./components/home"           // Dashboard com os cards principais
 
-// Importa o componente do Menu principal
-import Menu from "./components/menu"
-
-// Importa o componente da tela de Inventário
-import Inventario from "./components/inventario"
-
-import Importar from "./components/importar"
-
-import Exportar from "./components/exportar"
-
-import Home from "./components/home"
-
-
-
-// Componente principal da aplicação
+// Componente principal que coordena toda a aplicação
 function App() {
 
-  // Cria um estado chamado "tela"
-  // "tela" guarda qual tela deve ser exibida
-  // "setTela" é a função que muda o valor de "tela"
-  // O valor inicial é "login"
+  // Estado 'tela' controla qual página o usuário está vendo no momento.
+  // Começa em "login" para garantir que o sistema seja protegido.
   const [tela, setTela] = useState("login")
 
-  // O return define o que será renderizado na tela
   return (
-        
-    // Div principal que envolve toda a aplicação
+    // Div principal: serve como o container raiz para todos os elementos
     <div>
+      
+      {/* LÓGICA DO MENU:
+        Se a tela NÃO for "login", o Menu deve aparecer no topo.
+        Passamos a função 'setTela' para o Menu como a prop 'mudarTela'.
+      */}
       {tela !== "login" && (
         <Menu mudarTela={setTela} />
       )}
 
-      {/* 
-        Se o valor de "tela" for "login",
-        o componente Login será exibido
-        onLogin recebe uma função que muda a tela para "menu"
+      {/* NAVEGAÇÃO CONDICIONAL:
+        O React verifica o valor de 'tela' e renderiza apenas o componente correspondente.
       */}
+
+      {/* Tela de Login: Quando o login é bem-sucedido, muda o estado para "home" */}
       {tela === "login" && (
         <Login onLogin={() => setTela("home")} />
       )}
 
-      {/*
-        Se o valor de "tela" for "menu",
-        o componente Menu será exibido
-        mudarTela recebe a função setTela
-      */}
-      
-
-      {/*
-        Se o valor de "tela" for "inventario",
-        o componente Inventario será exibido
-      */}
-      {tela === "inventario" && (
-        <Inventario />
-      )}
-
-      {tela === "importar" && (
-        <Importar />
-      )}
-
-
-       {tela === "exportar" && (
-        <Exportar />
-      )}
-
+      {/* Tela Inicial (Home): Exibe os cards de atalho para outras funções */}
       {tela === "home" && (
         <Home mudarTela={setTela} />
       )}
 
-         
+      {/* Tela de Inventário: Onde a tabela de produtos é exibida */}
+      {tela === "inventario" && (
+        <Inventario />
+      )}
+
+      {/* Tela de Importação: Local para upload de planilhas XLSX */}
+      {tela === "importar" && (
+        <Importar />
+      )}
+
+      {/* Tela de Exportação: Local para gerar relatórios XLSX */}
+      {tela === "exportar" && (
+        <Exportar />
+      )}
 
     </div> // Fecha a div principal
   )
 }
 
-// Exporta o componente App para que o React possa usá-lo
+// Exporta o App para que o arquivo index.js possa renderizá-lo no navegador
 export default App
