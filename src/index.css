@@ -1,124 +1,132 @@
-/* 1. DEFINIÇÃO DAS CORES (A BIBLIOTECA DO SISTEMA) */
+/* --- 1. DEFINIÇÃO DE VARIÁVEIS (THEMING) --- */
 :root {
-  /* TEMA CLARO - Ativado por padrão */
-  --bg-fundo: #8d9fb6;          /* Cor de fundo principal (azul acinzentado) */
-  --bg-card: #f8fafc;           /* Fundo dos cartões e tabelas */
-  --bg-menu: #f1f5f9;           /* Fundo da barra superior fixa */
-  --texto-cor: #1e293b;         /* Cor principal dos textos e botões */
-  --texto-secundario: #64748b;  /* Cor para descrições e detalhes menores */
-  --borda-card: #cbd5e1;        /* Cor das linhas separadoras e contornos */
-  --azul-destaque: #3b82f6;     /* Cor de foco (links, hover e botões principais) */
+  /* Tema Claro (Padrão) - Paleta Creme e Azul Profissional */
+  --bg-fundo: #8d9fb6;          
+  --bg-card: #e0d8c3;
+      
+  --bg-menu: #e2e8f0;           
+  --texto-cor: #1e293b;         
+  --texto-secundario: #64748b;  
+  --borda-card: #cbd5e1;        
+  --azul-destaque: #3b82f6;     
 }
 
-/* 2. TEMA ESCURO - Sobrescreve as variáveis acima quando [data-theme='dark'] existe no <html> */
+/* Tema Escuro - Ativado via atributo data-theme no HTML */
 [data-theme='dark'] {
-  --bg-fundo: #1a1a2e;          /* Azul marinho profundo */
-  --bg-card: #2b3640;           /* Cinza azulado para destacar do fundo */
-  --bg-menu: #111111;           /* Preto sólido para foco total no conteúdo */
-  --texto-cor: #ffffff;         /* Branco para leitura no fundo escuro */
+  --bg-fundo: #1a1a2e;          
+  --bg-card: #2b3640;           
+  --bg-menu: #111111;           
+  --texto-cor: #f1f5f9;         
   --texto-secundario: #9aa5b1;
-  --borda-card: #ffffff;        /* Borda branca para contorno visível no escuro */
-  --azul-destaque: #4a90e2;     /* Azul um pouco mais vibrante */
+  --borda-card: #475569;        
+  --azul-destaque: #4a90e2;     
 }
 
-/* 3. REGRAS GERAIS DE COMPORTAMENTO */
+/* --- 2. REGRAS GERAIS DO DOCUMENTO --- */
 body {
   margin: 0;
   min-height: 100vh;
-  /* O body muda de cor automaticamente porque escuta as variáveis */
   background-color: var(--bg-fundo); 
   color: var(--texto-cor);
-  font-family: Arial, sans-serif;
-  /* Transição suave para o usuário não sentir um impacto visual brusco ao trocar o tema */
+  font-family: 'Inter', Arial, sans-serif;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* 4. BARRA SUPERIOR (MENU FIXO) */
+/* --- 3. BARRA SUPERIOR (MENU FIXO ANTI-COLAPSO) --- */
 .menu-topo {
-  position: fixed; /* Fica preso no topo mesmo ao rolar a página */
-  top: 0; left: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 64px;
-  display: flex;
+  height: 60px;
+
+  /* Grid de 3 colunas: Lados fixos e Centro flexível */
+  display: grid;
+  grid-template-columns: 200px 1fr 160px;
   align-items: center;
-  justify-content: space-between; /* Divide o menu em: Título | Botões Centro | Botões Direita */
-  padding: 0 30px;
-  background-color: var(--bg-menu); /* Usa a cor de fundo do menu dinâmica */
+
+  padding: 0 20px;
+  background-color: var(--bg-menu);
   border-bottom: 1px solid var(--borda-card);
-  z-index: 1000; /* Garante que fique acima de tabelas e cards */
+  z-index: 1000;
   box-sizing: border-box;
 }
 
-/* Layout do Menu (Flexbox) */
-.menu-titulo, .menu-direita {
-    flex: 1;
-    display: flex;
-    align-items: center; /* Alinha a imagem verticalmente no centro */
+/* Lado Esquerdo: Logo (Coluna Fixa) */
+.menu-titulo {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0; /* Impede que a logo seja esmagada */
 }
 
+.logo-menu {
+  max-height: 30px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Centro: Navegação (Flexível) */
 .menu-central {
   display: flex;
-  gap: 20px;
   justify-content: center;
-  flex: 2; /* Ocupa o dobro de espaço para os botões principais ficarem no centro */
+  gap: 20px;
+  min-width: 0; /* Permite que o container encolha se necessário */
+  overflow: hidden;
 }
 
+/* Lado Direito: Ações (Coluna Fixa) */
 .menu-direita {
+  width: 160px;
   display: flex;
   justify-content: flex-end;
-  gap: 15px;
-  align-items: center;
-}
-.logo-menu {
-  height: 45px;        /* Define a altura da sua imagem */
-  width: auto;         /* Ajusta a largura automaticamente para não amassar */
-  cursor: pointer;     /* Mostra a "mãozinha" ao passar o mouse */
-  transition: 0.3s;    /* Deixa o efeito de hover suave */
+  gap: 10px;
+  flex-shrink: 0;
 }
 
-.logo-menu:hover {
-  filter: brightness(1.2); /* Dá um leve brilho ao passar o mouse */
-  transform: scale(1.02);  /* Aumenta levemente o tamanho */
-}
-
-/* Estilo dos botões do Menu */
+/* --- 4. BOTÕES DO MENU --- */
 .menu-topo button {
   background: transparent;
-  color: var(--texto-cor); /* A cor do texto do botão muda com o tema */
+  color: var(--texto-cor);
   border: none;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  transition: 0.3s;
+  white-space: nowrap; /* Impede que o texto do botão quebre linha */
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px;
+  transition: color 0.2s;
 }
 
-.menu-topo button:hover {
-  color: var(--azul-destaque); /* Realce ao passar o mouse */
+/* Destaque para a página onde o usuário está */
+.menu-topo button.botao-ativo {
+  color: var(--azul-destaque);
+  font-weight: 700;
+  border-bottom: 2px solid var(--azul-destaque);
 }
 
-/* BOTÃO DE TEMA (O Interruptor Visual) */
-.btn-tema {
-  /* O !important garante que esse estilo vença outras regras mais gerais */
-  border: 1px solid var(--azul-destaque) !important;
-  border-radius: 20px !important;
-  padding: 5px 15px !important;
-}
-
-.btn-sair {
-  color: #ff4757 !important; /* Cor vermelha fixa para indicar ação de saída */
-}
-
-/* 5. RESPONSIVIDADE - Ajusta o menu para celulares */
-@media (max-width: 768px) {
-  .menu-topo { 
-    height: auto; 
-    padding: 10px; 
-    flex-direction: column; /* Empilha os itens um sobre o outro no mobile */
+/* --- 5. RESPONSIVIDADE (Telas de Tablets e Celulares) --- */
+@media (max-width: 1150px) {
+  .menu-topo {
+    display: flex; /* Muda de Grid para Flex em telas pequenas */
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
   }
-  .menu-botoes { 
-    flex-wrap: wrap; 
-    justify-content: center; 
-    margin-top: 10px; 
+
+  .menu-titulo,
+  .menu-direita,
+  .menu-central {
+    width: 100%;
+    justify-content: center;
+    margin: 5px 0;
   }
-  .menu-botoes button { min-width: 100px; }
+
+  .menu-central {
+    flex-wrap: wrap; /* Permite que os botões do menu desçam em telas muito estreitas */
+    border-top: 1px solid var(--borda-card);
+    padding-top: 10px;
+  }
 }

@@ -1,118 +1,140 @@
-/* Container Principal */
+/* --- CONTAINER PRINCIPAL DA HOME --- */
 .btshome {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 120px 20px 60px;
-    text-align: left;
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bg-fundo); /* Aplica o fundo dinâmico */
-    min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 20px 60px; /* Espaçamento para não colidir com o menu fixo */
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-fundo); 
+  min-height: 100vh;
 }
 
-/* Título principal da Home */
+/* --- TÍTULO DE BOAS-VINDAS --- */
 .btshome h1 {
-    color: var(--texto-cor);
-    margin-bottom: 40px;
-    font-size: 2.8rem;
-    font-weight: 600;
-    letter-spacing: -1px;
-    transition: color 0.3s ease;
+  color: var(--texto-cor);
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: -1px;
+  transition: color 0.3s ease;
 }
 
-/* Container que organiza os cards LADO A LADO */
+/* --- GRID DE BOTÕES/CARDS --- */
 .btshome .buttons-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: flex-start;
-    align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Permite que os cards desçam em telas menores */
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch; /* Garante que todos os cards tenham a mesma altura na linha */
 }
 
-/* Estilização dos Botões (Cards) */
+/* --- ESTILIZAÇÃO DOS CARDS (BOTÕES) --- */
 .btshome button {
-    flex: 1;
-    min-width: 320px;
-    max-width: 380px;
-    display: flex;
-    flex-direction: column;
-    padding: 0; 
-    overflow: hidden; 
-    border-radius: 25px;
-    background-color: var(--bg-card);
-    /* Adicionada borda dinâmica para o modo escuro ter contorno */
-    border: 1px solid var(--borda-card); 
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 300px;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  padding: 0; 
+  overflow: hidden; 
+  border-radius: 25px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--borda-card); 
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Efeito de Hover */
+/* Efeito de levitação ao passar o mouse */
 .btshome button:hover {
-    transform: translateY(-10px);
-    border-color: var(--azul-destaque); /* Destaque na borda ao passar o mouse */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-10px);
+  border-color: var(--azul-destaque);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* Área da Imagem no Topo */
+/* --- HEADER DO CARD (CONTAINER DA IMAGEM) --- */
 .card-header {
-    background-color: var(--bg-menu); /* Usando bg-menu para um leve contraste interno */
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background 0.3s ease;
-    border-bottom: 1px solid var(--borda-card);
+  background-color: var(--bg-menu);
+  width: 100%;
+  height: 200px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--borda-card);
+  overflow: hidden; /* Mantém o zoom da imagem dentro dos limites do card */
+  padding: 0; 
 }
 
-/* Estilo do Ícone */
+/* --- IMAGEM/ÍCONE DO CARD --- */
 .card-icon {
-    width: auto; 
-    
-    height: 250px;
-    object-fit: contain;
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+  width: 100%;    
+  height: 100%;    
+  object-fit: cover; /* Preenche o espaço cortando as bordas sem distorcer */
+  transition: transform 0.5s ease;
 }
 
-/* Área do Texto (Corpo do Card) */
+/* Efeito de zoom suave na imagem no hover */
+.btshome button:hover .card-icon {
+  transform: scale(1.1);
+}
+
+/* --- CORPO DO CARD (TEXTOS) --- */
 .card-body {
-    padding: 30px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+  padding: 25px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Faz o corpo ocupar o espaço restante do card */
 }
 
 .card-body h2 {
-    margin: 0;
-    color: var(--texto-cor);
-    font-size: 1.8rem;
-    font-weight: 700;
+  margin: 0;
+  color: var(--texto-cor);
+  font-size: 1.6rem;
+  font-weight: 700;
 }
 
 .card-body .subtitle {
-    display: block;
-    margin: 8px 0 15px 0;
-    color: var(--azul-destaque); /* Subtítulos agora usam a cor de destaque */
-    font-size: 1.1rem;
-    font-weight: 500;
+  display: block;
+  margin: 5px 0 15px 0;
+  color: var(--azul-destaque);
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .card-body p {
-    margin: 0;
-    color: var(--texto-secundario);
-    font-size: 1rem;
-    line-height: 1.6;
+  margin: 0;
+  color: var(--texto-secundario);
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
-/* Responsividade */
+/* --- REGRAS DE RESPONSIVIDADE --- */
+
+/* Tablets e Telas Médias */
+@media (max-width: 1024px) {
+  .btshome h1 { font-size: 2rem; }
+  .btshome button { min-width: 280px; }
+}
+
+/* Smartphones e Telas Pequenas */
 @media (max-width: 768px) {
-    .btshome { padding-top: 100px; text-align: center; }
-    .btshome h1 { font-size: 2.2rem; text-align: center; }
-    .btshome .buttons-container { justify-content: center; }
-    .btshome button { max-width: 100%; min-width: 100%; }
+  .btshome { 
+    padding-top: 80px; 
+    text-align: center; 
+  }
+  .btshome h1 { 
+    font-size: 1.8rem; 
+  }
+  .btshome button { 
+    max-width: 100%; 
+    min-width: 100%; 
+  }
+  .card-body { 
+    text-align: center; 
+  }
 }

@@ -1,158 +1,205 @@
-/* Layout Geral */
+/* --- LAYOUT GERAL --- */
 .importar-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 120px 20px 60px;
-    background-color: var(--bg-fundo); /* Fundo dinâmico da página */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 20px 60px;
+  background-color: var(--bg-fundo);
 }
 
 .titulo-sessao {
-    color: var(--texto-cor); /* Texto dinâmico */
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 2.2rem;
+  color: var(--texto-cor);
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 2.2rem;
+  font-weight: 700;
 }
 
-/* Flexbox principal: Botão e Card lado a lado */
+/* Container Flex que divide a tela em duas partes */
 .importar-flex-layout {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    align-items: stretch;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-/* --- BOTÃO LATERAL (ESQUERDA) --- */
+/* --- GRUPO DE UPLOAD (COLUNA ESQUERDA) --- */
 .importar-sidebar {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
+  flex: 1;
+  max-width: 500px;
 }
 
-/* O Botão de Seleção */
+.grupo-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.legenda-grande {
+  color: var(--texto-cor);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.legenda-pequena {
+  color: var(--texto-cor);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Área de Drop/Clique para selecionar o arquivo */
 .area-upload-lateral {
-    background: var(--azul-destaque);
-    color: #ffffff;
-    border: none;
-    padding: 14px 28px;
-    border-radius: 12px;
-    font-weight: bold;
-    font-size: 0.95rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+  background: var(--azul-destaque);
+  color: #ffffff;
+  width: 100%;
+  padding: 50px 0;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 2px dashed transparent;
 }
 
 .area-upload-lateral:hover {
-    background: var(--azul-destaque);
-    color: #ffffff; /* Branco fixo para contraste no azul */
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  filter: brightness(1.1);
+}
+
+/* Estado Ativo: Quando o usuário já carregou um arquivo */
+.area-upload-lateral.ativo {
+  border-color: #ffffff;
+  background: #27ae60; /* Verde de sucesso */
 }
 
 .icon-upload { 
-    font-size: 1.2rem;
-    margin-bottom: 0; 
+  font-size: 2.5rem;
 }
 
 .text-upload { 
-    font-size: 1rem;
-    font-weight: 500;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* Badge do nome do arquivo quando selecionado */
+/* Selo com o nome do arquivo selecionado */
 .nome-arquivo-badge {
-    margin-left: 10px;
-    font-size: 0.8rem;
-    color: #2ecc71; /* Mantido verde para sucesso */
-    background: rgba(46, 204, 113, 0.1);
-    padding: 4px 8px;
-    border-radius: 4px;
+  font-size: 0.85rem;
+  color: #27ae60;
+  background: rgba(39, 174, 96, 0.1);
+  padding: 8px 15px;
+  border-radius: 30px;
+  border: 1px solid rgba(39, 174, 96, 0.2);
+  font-weight: 600;
 }
 
-/* --- CARD CENTRAL (DIREITA) --- */
+/* --- CARD DE AÇÕES E HISTÓRICO (COLUNA DIREITA) --- */
 .card-importar-compacto {
-    flex: 0 1 500px;
-    background: var(--bg-card);
-    border: 1px solid var(--borda-card);
-    border-radius: 24px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  flex: 0 1 450px;
+  background: var(--bg-card);
+  border: 1px solid var(--borda-card);
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-.secao-confirmacao h3, .secao-historico h3 {
-    color: var(--texto-cor);
-    font-size: 1.1rem;
-    margin-bottom: 15px;
+.secao-confirmacao h3, 
+.secao-historico h3 {
+  color: var(--texto-cor);
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  font-weight: 700;
 }
 
 .btn-confirmar-import {
-    width: 100%;
-    padding: 15px;
-    background: var(--azul-destaque);
-    color: #ffffff;
-    border: none;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+  width: 100%;
+  padding: 16px;
+  background: var(--azul-destaque);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 .btn-confirmar-import:hover:not(:disabled) {
-    filter: brightness(1.1);
+  filter: brightness(1.1);
+  transform: scale(1.02);
 }
 
+/* Estilo do botão desativado até que o arquivo seja selecionado */
 .btn-confirmar-import:disabled {
-    background: var(--bg-fundo);
-    color: var(--texto-secundario);
-    cursor: not-allowed;
-    opacity: 0.6;
+  background: var(--bg-fundo);
+  color: var(--texto-secundario);
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .linha-divisor {
-    height: 1px;
-    background: var(--borda-card);
-    margin: 25px 0;
+  height: 1px;
+  background: var(--borda-card);
+  margin: 30px 0;
 }
 
-/* Lista de Histórico dentro do Card */
+/* --- LISTA DE ÚLTIMAS IMPORTAÇÕES --- */
 .lista-historico {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .lista-historico li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--borda-card);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--borda-card);
 }
 
 .hist-info strong { 
-    color: var(--texto-cor); 
-    font-size: 0.85rem; 
-    display: block; 
+  color: var(--texto-cor); 
+  font-size: 0.9rem; 
+  display: block; 
 }
 
 .hist-info span { 
-    color: var(--texto-secundario); 
-    font-size: 0.75rem; 
+  color: var(--texto-secundario); 
+  font-size: 0.75rem; 
 }
 
 .hist-qtd { 
-    color: #2ecc71; 
-    font-weight: bold; 
-    font-size: 0.85rem; 
+  color: #27ae60; 
+  font-weight: 800; 
+  font-size: 0.9rem; 
 }
 
-.msg-sucesso-small { color: #2ecc71; font-size: 0.85rem; margin-top: 10px; }
-.msg-erro-small { color: #e74c3c; font-size: 0.85rem; margin-top: 10px; }
+/* Mensagens de Feedback */
+.msg-sucesso-small { color: #27ae60; font-size: 0.9rem; margin-top: 15px; font-weight: 600; text-align: center; }
+.msg-erro-small { color: #e74c3c; font-size: 0.9rem; margin-top: 15px; font-weight: 600; text-align: center; }
 
-@media (max-width: 800px) {
-    .importar-flex-layout { flex-direction: column; align-items: center; }
-    .importar-sidebar { width: 100%; }
-    .card-importar-compacto { width: 100%; }
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 900px) {
+  .importar-flex-layout { 
+    flex-direction: column; 
+    align-items: center; 
+  }
+  .importar-sidebar, 
+  .card-importar-compacto { 
+    width: 100%; 
+    max-width: 100%; 
+  }
+  .area-upload-lateral { 
+    padding: 40px 0; 
+  }
 }

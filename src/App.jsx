@@ -1,65 +1,66 @@
-// Importa o hook 'useState' do React para gerenciar a navegação interna (SPA)
+// Importa o hook 'useState' do React para gerenciar a navegação interna
 import { useState } from "react"
 
 // --- IMPORTAÇÃO DOS COMPONENTES (Páginas do Sistema) ---
-import Login from "./components/Login"      // Tela de acesso e recuperação
-import Menu from "./components/menu"        // Barra superior de navegação e tema
-import Inventario from "./components/inventario" // Tabela e gerenciamento de itens
-import Importar from "./components/importar"   // Tela de upload de Excel
-import Exportar from "./components/exportar"   // Tela de download de Excel
-import Home from "./components/home"           // Dashboard com os cards principais
+import Login from "./components/Login"      
+import Menu from "./components/menu"        
+import Inventario from "./components/inventario" 
+import Importar from "./components/importar"   
+import Exportar from "./components/exportar"   
+import Home from "./components/home"           
 
-// Componente principal que coordena toda a aplicação
+/**
+ * Componente Principal App
+ * Gerencia o estado global de navegação e a renderização condicional dos componentes.
+ */
 function App() {
 
   // Estado 'tela' controla qual página o usuário está vendo no momento.
-  // Começa em "login" para garantir que o sistema seja protegido.
+  // Começa em "login" para garantir a segurança no acesso inicial.
   const [tela, setTela] = useState("login")
 
   return (
-    // Div principal: serve como o container raiz para todos os elementos
     <div>
       
       {/* LÓGICA DO MENU:
-        Se a tela NÃO for "login", o Menu deve aparecer no topo.
-        Passamos a função 'setTela' para o Menu como a prop 'mudarTela'.
+        O Menu só é renderizado se o usuário NÃO estiver na tela de login.
+        Enviamos 'setTela' para permitir navegação e 'tela' para destacar o botão ativo.
       */}
       {tela !== "login" && (
-        <Menu mudarTela={setTela} />
+        <Menu mudarTela={setTela} telaAtual={tela} />
       )}
 
-      {/* NAVEGAÇÃO CONDICIONAL:
-        O React verifica o valor de 'tela' e renderiza apenas o componente correspondente.
+      {/* SISTEMA DE NAVEGAÇÃO CONDICIONAL:
+        Dependendo do valor de 'tela', renderizamos o componente correspondente.
       */}
 
-      {/* Tela de Login: Quando o login é bem-sucedido, muda o estado para "home" */}
+      {/* Tela de Login: Recebe a função onLogin para mudar para a home após o acesso */}
       {tela === "login" && (
         <Login onLogin={() => setTela("home")} />
       )}
 
-      {/* Tela Inicial (Home): Exibe os cards de atalho para outras funções */}
+      {/* Tela Inicial (Dashboard): Onde o usuário escolhe as ações principais */}
       {tela === "home" && (
         <Home mudarTela={setTela} />
       )}
 
-      {/* Tela de Inventário: Onde a tabela de produtos é exibida */}
+      {/* Tela de Gerenciamento: Lista e filtros de produtos */}
       {tela === "inventario" && (
         <Inventario />
       )}
 
-      {/* Tela de Importação: Local para upload de planilhas XLSX */}
+      {/* Tela de Upload: Processamento de arquivos Excel */}
       {tela === "importar" && (
         <Importar />
       )}
 
-      {/* Tela de Exportação: Local para gerar relatórios XLSX */}
+      {/* Tela de Download: Exportação do estoque e histórico de buscas */}
       {tela === "exportar" && (
         <Exportar />
       )}
 
-    </div> // Fecha a div principal
+    </div> 
   )
 }
 
-// Exporta o App para que o arquivo index.js possa renderizá-lo no navegador
 export default App

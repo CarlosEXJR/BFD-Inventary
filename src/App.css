@@ -1,47 +1,19 @@
-/* --- 1. DEFINIÇÃO DA BIBLIOTECA DE CORES --- */
-
-:root {
-  /* TEMA CLARO (Refinado) */
-  --bg-fundo: #a3bee4;          /* Cinza claro com leve azul (menos apagado) */
-  --bg-card: #ffffff;           /* Branco mantém ótima leitura */
-  
-  --texto-cor: #1a1a1a;         /* Grafite escuro */
-  --texto-secundario: #5f6b7a;  /* Cinza levemente azulado */
-
-  --borda-card: #d6deeb;        /* Borda azulada sutil (mais identidade) */
-
-  --azul-destaque: #4f46e5;     /* Azul/roxo mais “tech” e moderno */
-
-  /* Compatibilidade com o body */
-  --bg-cor-fundo: var(--bg-fundo);
-  --texto-principal: var(--texto-cor);
-}
-
-
-[data-theme='dark'] {
-  --bg-fundo: #121212;
-  --bg-card: #1e1e1e;
-
-  --texto-cor: #ffffff;
-  --texto-secundario: #b6b6c0;  /* Um tiquinho mais azulado */
-
-  --borda-card: #2f2f3a;        /* Harmoniza com o roxo */
-
-  --azul-destaque: #8b5cf6;     /* Continua brilhando no escuro */
-}
-
-/* --- 2. ESTILOS GERAIS DO SISTEMA --- */
+/* --- 1. RESET E ESTILOS GERAIS DO SISTEMA --- */
 
 body {
-  /* Aqui o body "escuta" a biblioteca acima */
+  /* O body utiliza as variáveis definidas no :root para trocas de tema dinâmicas */
   background-color: var(--bg-fundo);
   color: var(--texto-cor);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
+  /* Transição suave para que a mudança de tema não seja brusca aos olhos */
   transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Estilo das Logos (com as animações que você já tinha) */
+/* --- 2. ESTILIZAÇÃO DE LOGOS E ANIMAÇÕES --- */
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -49,28 +21,35 @@ body {
   transition: filter 300ms;
 }
 
+/* Efeito de brilho externo usando a cor de destaque do sistema */
 .logo:hover {
-  filter: drop-shadow(0 0 2em var(--azul-destaque)); /* Usando a cor de destaque no brilho */
+  filter: drop-shadow(0 0 2em var(--azul-destaque));
 }
 
-/* Animação de rotação */
+/* Animação de rotação infinita para logos específicas */
 @keyframes logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
+/* Aplica a animação apenas se o usuário não tiver restrições de movimento no SO */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
 
+/* --- 3. COMPONENTES GERAIS --- */
+
 .card {
   padding: 2em;
-  background-color: var(--bg-card); /* Garante que cards globais sigam o tema */
+  background-color: var(--bg-card); /* Segue o esquema de cores do tema atual */
   color: var(--texto-cor);
+  border-radius: 8px;
+  border: 1px solid var(--borda-card);
 }
 
 .read-the-docs {
-  color: var(--texto-secundario); /* Cor suave para textos informativos */
+  /* Utilizado para textos de ajuda ou legendas menos importantes */
+  color: var(--texto-secundario); 
 }
