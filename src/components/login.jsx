@@ -1,19 +1,40 @@
 import { useState } from 'react'; 
 import '../csscomponents/login.css';
 
-/**
- * Componente Login
- * Gerencia a autenticação do usuário e a interface de recuperação de senha.
- * Recebe 'onLogin' como prop para disparar a entrada no sistema.
- */
 function Login({ onLogin }) {
-  // Estado para alternar entre a tela de login e a de recuperação de senha
   const [verRecuperar, setVerRecuperar] = useState(false);
+  
+  // Estados para Login
+  const [usuario, setUsuario] = useState("");
+  const [senha, setSenha] = useState("");
+  
+  // Estado para E-mail de Recuperação
+  const [email, setEmail] = useState("");
 
   /**
-   * Renderização Condicional: Tela de Recuperação
-   * Exibida quando 'verRecuperar' for verdadeiro.
+   * Validação de Login: Simula acesso com '123'
    */
+  const handleEntrar = () => {
+    if (usuario === "123" && senha === "123") {
+      onLogin();
+    } else {
+      alert("Usuário ou senha incorretos!\nDica: Use '123' para ambos.");
+    }
+  };
+
+  /**
+   * Validação de E-mail: Verifica se existe o caractere '@'
+   */
+  const handleRecuperar = () => {
+    if (!email.includes("@")) {
+      alert("Por favor, insira um e-mail válido (deve conter @).");
+    } else {
+      alert(`Link de recuperação enviado para: ${email}`);
+      setVerRecuperar(false); // Volta para o login após sucesso
+    }
+  };
+
+  // --- TELA DE RECUPERAÇÃO ---
   if (verRecuperar) {
     return (
       <div className="login">
@@ -22,16 +43,21 @@ function Login({ onLogin }) {
           Insira seu e-mail para receber as instruções.
         </p>
         
-        <input type="email" placeholder="E-mail cadastrado" />
+        <input 
+          type="email" 
+          placeholder="E-mail cadastrado" 
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         
         <button 
           className="btn-entrar" 
           style={{ marginTop: '20px' }}
+          onClick={handleRecuperar}
         >
           Enviar Link
         </button>
         
-        {/* Link para retornar ao estado inicial de login */}
         <h6 
           onClick={() => setVerRecuperar(false)} 
           style={{ cursor: 'pointer', marginTop: '20px', color: 'var(--azul-destaque)' }}
@@ -42,20 +68,26 @@ function Login({ onLogin }) {
     );
   }
 
-  /**
-   * Renderização Principal: Tela de Acesso
-   * Interface padrão contendo campos de usuário, senha e ação de entrar.
-   */
+  // --- TELA DE ACESSO (LOGIN) ---
   return (
     <div className="login">
       <h2>Acessar Sistema</h2>
       
       <div className="form-grupo">
-        <input type="text" placeholder="Usuário" />
-        <input type="password" placeholder="Senha" />
+        <input 
+          type="text" 
+          placeholder="Usuário" 
+          value={usuario}
+          onChange={(e) => setUsuario(e.target.value)}
+        />
+        <input 
+          type="password" 
+          placeholder="Senha" 
+          value={senha}
+          onChange={(e) => setSenha(e.target.value)}
+        />
       </div>
 
-      {/* Aciona a troca de estado para ver a recuperação */}
       <h6 
         onClick={() => setVerRecuperar(true)} 
         style={{ cursor: 'pointer', margin: '10px 0' }}
@@ -63,7 +95,7 @@ function Login({ onLogin }) {
         Esqueci minha senha
       </h6>
 
-      <button onClick={onLogin}>Entrar</button>
+      <button onClick={handleEntrar}>Entrar</button>
     </div>
   );
 }
